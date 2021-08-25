@@ -1,0 +1,89 @@
+.MessageWrapper{
+    width: 100%;
+    -moz-user-select: none; -khtml-user-select: none; user-select: none;
+}
+.MessageWrapper+.MessageWrapper{
+    margin-top: 15px;
+}
+.Message{
+    overflow:hidden;
+    background-color: white;
+
+    border-radius:7px;
+    max-width: 300px;
+    min-width: 150px;
+    width: fit-content;
+    -moz-user-select:text; -khtml-user-select: text; user-select: text;
+    position: relative;
+}
+.MessageWithImages{
+    padding-top: 5px;
+}
+
+.MessageAuthor{
+    margin-left: auto;
+}
+.Reply{
+    padding-left: 20px;
+    margin-bottom: 10px;
+    padding-top: 5px;
+}
+.ReplyUser{
+    color: rgb(99, 171, 253);
+    font-weight: 700;
+}
+.Select{
+    background-color: rgb(140, 228, 255);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.5;
+    border-radius:10px;
+}
+
+
+.MessageText{
+    padding: 0px 15px 10px 15px;
+    overflow-wrap: break-word;
+    width: calc(100% - 32px);
+    margin-top: 10px;
+}
+
+
+.ForwardMessage{
+    color: rgb(25, 151, 253);
+    font-weight: 600;
+    margin-bottom: 10px;
+    padding:0 15px;
+    margin-top: 10px;
+    /* text-align: right; */
+}
+.AuthorName{
+    /* color: rgb(185, 113, 253); */
+    margin-left: 15px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+.Date{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 14px;
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none;  
+    -khtml-user-select: none;   
+    -moz-user-select: none;     
+    -ms-user-select: none;      
+    user-select: none;  
+}
+@media (max-width: 900px){
+    .Message{
+        max-width: 200px;
+        min-width: 100px;
+
+    }
+
+} 

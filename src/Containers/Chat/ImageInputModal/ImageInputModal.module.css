@@ -1,0 +1,77 @@
+.Component{
+
+    width: 500px;
+    margin: 0 auto;
+}
+
+.Images{
+    width: 200px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+.TitleNoImages{
+    margin-top: 40px;
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 22px;
+}
+.Image{
+    display: block;
+    height: 100px;
+
+}
+.ControlButtons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-between; */
+    /* align-items: center; */
+}
+.InputText{
+    height: 30px;
+    width: 300px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+.Button{
+    display: block;
+    width: 200px;
+    height: 40px;
+    background-color: rgb(96, 199, 247);
+    border-radius: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    color: black;
+}
+.Button:hover{
+    cursor: pointer;
+    background-color: rgb(110, 209, 255);
+}
+.Button{
+    margin-top: 20px;
+}
+@media (max-width: 650px){
+    .Component{
+        width: 300px;
+    }
+    .InputText{
+        width: 200px;
+    }
+    .Button{
+        width: 140px;
+    }
+} 
+@media (max-width: 400px){
+    .Component{
+        width: 200px;
+    }
+    .InputText{
+        width: 150px;
+    }
+    .Images{
+        width: 130px;
+    }
+} 

@@ -1,0 +1,30 @@
+.Modal{
+
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%,-55%);
+    background-color: white;
+    left: 50%;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,.5);
+    border-radius: 10px;
+    padding: 30px 20px;
+    z-index: 500;
+}
+@media (max-width: 800px){
+    .Modal{
+        min-width: 60vw;
+    
+        transform: translate(-50%,-50%);
+        max-height: 95vh;
+        /* padding: 15px 20px; */
+    }
+} 
+@media (max-height: 500px){
+    .Modal{
+    
+        transform: translate(-50%,-50%);
+        max-height: 95vh;
+        padding: 15px 20px;
+    }
+} 

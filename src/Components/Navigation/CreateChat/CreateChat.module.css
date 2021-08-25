@@ -1,0 +1,127 @@
+.AddChat{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    margin: 0 auto;
+}
+.Title{
+    text-align: center;
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+.Wrapper{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.ImageWrapper{
+    width: 80px;
+    height: 80px;
+    /* background-color: gray; */
+    border-radius: 50%;
+    margin: 0 auto;
+}
+.Image{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.descArea{
+    width: 300px;
+    height: 150px;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.InputName{
+    font-size: 22px;
+    margin-right: 20px;
+}
+.Input{
+    
+    height: 40px;
+    width: 200px;
+    font-size: 20px;
+    padding: 0 10px;
+    
+}
+.Button{
+    background-color: rgb(103, 210, 243);
+    width: 130px;
+    height: 40px;
+    font-size: 18px;
+    border-radius: 10px;
+    display: block;
+    /* margin: 0 auto; */
+}
+@media (max-width: 800px){
+    .Wrapper{
+        /* display: block; */
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .AddChat{
+        width:400px;
+
+    }
+    .Title{
+        margin-bottom: 20px;
+    }
+    .InputName{
+        margin-bottom: 20px;
+    }
+    .Input{
+        width: 90%;
+    }
+    .ImageWrapper{
+        order: 0;
+        width: 150px;
+        height: 150px;
+    }
+    .descArea{
+        height: 70px;
+        width: 90%;
+    }
+    .descImageWrapper{
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        
+    }
+    
+    .descImageWrapper .InputName{
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    
+} 
+
+@media (max-width: 650px){
+    .ImageWrapper{
+        width: 100px;
+        height: 100px;
+    }
+  
+    .InputName{
+        font-size: 22px;
+        margin: 0;
+        margin-bottom: 22px;
+    }  
+    .Title{
+        font-size: 26px;
+    }
+
+} 
+@media (max-width: 550px){
+    .AddChat{
+        width:260px;
+
+    }
+
+} 

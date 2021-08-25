@@ -1,0 +1,112 @@
+.ChatsList{
+   
+    width: 25%;
+    background-color:rgb(228, 228, 228);
+    border-right: 2px solid gray;
+    
+    
+}
+.Navigation{
+    height: 50px;
+    display: flex;
+    justify-content:space-between;
+    padding: 5px 10px;
+    align-items: center;
+}
+.Input input{
+    height: 30px;
+    width: 200px;
+    /* height: ; */
+}
+.Burger{
+    width: 20px;
+}
+.Burger:hover{
+    cursor: pointer;
+}
+.Burger img{
+    width: 100%;
+}
+.ChatsItems{
+    /* height: calc(100vh - 50px); */
+    overflow: auto;
+
+}
+.AddWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 9vh;
+    
+}
+.Add{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: rgb(110, 233, 255);
+    border: 2px solid black;
+    position: relative;
+    transition: all .2s;
+}
+.Add:hover{
+    background-color: rgb(33, 220, 253);
+    cursor: pointer;
+}
+.Add::after{
+    content: "";
+    width: 2px;
+    background-color: black;
+    position: absolute;
+    top: 3px;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 1px;
+}
+.Add::before{
+    content: "";
+    height: 2px;
+    background-color: black;
+    position: absolute;
+    left: 3px;
+    right: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 2px;
+}
+.NoSearchChat{
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+
+@media (max-width: 1200px){
+    .ChatsList{
+        width: 30%;
+
+    }
+    .Input input{
+        height: 30px;
+        width: 150px;
+        /* height: ; */
+    }
+} 
+@media (max-width: 900px){
+    .ChatsList{
+        width: 35%;
+
+    }
+   
+} 
+@media (max-width: 650px){
+    .ChatsList{
+        width: 100%;
+
+    }
+    .Input input{
+        height: 30px;
+        width: 250px;
+        /* height: ; */
+    }
+} 

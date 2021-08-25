@@ -1,0 +1,21 @@
+/* .chats{
+    background-color: aquamarine;
+    height: 100%;
+    width: 100%;
+}
+.chatWindow{
+    background-color: bisque;
+    height: 100%;
+    width: 100%;
+} */
+.MainWindow{
+    /* height: 100%; */
+    /* width: 100%;
+  
+    position: absolute;
+    top: 0.5px;
+    left: 0;
+    right: 0;
+    bottom: 0.5px;*/
+    display: flex;
+} 
