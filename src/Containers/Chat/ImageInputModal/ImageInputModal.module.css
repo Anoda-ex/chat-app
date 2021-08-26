@@ -1,6 +1,5 @@
 .Component{
 
-    width: 500px;
     margin: 0 auto;
 }
 
@@ -29,7 +28,7 @@
 }
 .InputText{
     height: 30px;
-    width: 300px;
+    /* width: 300px; */
     padding: 5px;
     margin-bottom: 10px;
 }
@@ -53,25 +52,31 @@
 .Button{
     margin-top: 20px;
 }
-@media (max-width: 650px){
-    .Component{
-        width: 300px;
-    }
+@media (max-width: 800px){
+
     .InputText{
         width: 200px;
     }
     .Button{
         width: 140px;
     }
+    .TitleNoImages{
+        font-size: 20px;
+    }
 } 
 @media (max-width: 400px){
-    .Component{
-        width: 200px;
-    }
+  
     .InputText{
         width: 150px;
     }
     .Images{
         width: 130px;
+    }
+} 
+@media (max-height: 600px){
+  
+
+    .Images{
+        height: 200px;
     }
 } 

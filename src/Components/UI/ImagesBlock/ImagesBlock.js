@@ -22,14 +22,27 @@ export default class ImagesBlock extends React.Component {
         }   
         return imageWidthTable[imagesCount][number]
     }
+    getImageHeight=(imagesCount,number)=>{
+        let imageHeightTable={
+            0:[100],
+            1:[50],
+            2:[50],
+            3:[50],
+            4:[100/3],
+            5:[100/3],
+            6:[100/3],
+            7:[100/4],
+            8:[100/4],
+            9:[100/4],
+            10:[100/4]
+        }   
+        return imageHeightTable[imagesCount]
+    }
     changeFocusImage=(event,imageIndex)=>{
         let focusImageIndex=this.state.focusImage
         let countOfImages=this.props.images.length
-        // // let 
-        // console.log(event.nativeEvent.wheelDelta,focusImageIndex,);
         if(event.nativeEvent.wheelDelta<    0){
-            // 10 фоток
-            // 9 индекс
+  
             if(focusImageIndex>=countOfImages-1){
                 focusImageIndex=0
             }else{
@@ -45,15 +58,18 @@ export default class ImagesBlock extends React.Component {
         this.setState({focusImage:focusImageIndex})
     }
     render(){
-
         return (
             <div className={classes.ImagesWrapper}>
                         {this.props.images.map((image,num)=>{
-                            return <div key={num}  style={{
-                                width:this.getImageWidth(this.props.images.length,num)+"%"
-                            }}>
-                                <img src={image} className={classes.Image} onClick={()=>{this.setState({focusImage:num})}}></img>
-                            </div>
+                            if(num<=10){
+
+                                return <div key={num}  style={{
+                                    width:this.getImageWidth(this.props.images.length,num)+"%",
+                                    height:this.getImageHeight(this.props.images.length,num)+"%",
+                                }}>
+                                    <img src={image} className={classes.Image} onClick={()=>{this.setState({focusImage:num})}}></img>
+                                </div>
+                            }
                         })}
 
                         {this.state.focusImage>-1 && <React.Fragment>

@@ -4,7 +4,8 @@ const initState={
     // UID:false,
     isAuth:true,
     loading:false,
-    error:null
+    error:null,
+    userListeners:[]
 }
 export default (state=initState,action)=>{
     switch (action.type) {
@@ -37,6 +38,12 @@ export default (state=initState,action)=>{
                 error:null
             
             }
+        case actions.ADD_FIREBASE_USER_LISTENER:{
+            return{
+                ...state,
+                userListeners:[...state.userListeners,action.ref]
+            }
+        }
         default:
             return state
     }

@@ -12,11 +12,13 @@
     justify-content:space-between;
     padding: 5px 10px;
     align-items: center;
+    /* background-color: rgb(206, 229, 255); */
 }
 .Input input{
     height: 30px;
     width: 200px;
     /* height: ; */
+    padding: 0 10px;
 }
 .Burger{
     width: 20px;

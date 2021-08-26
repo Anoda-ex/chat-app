@@ -32,25 +32,23 @@ export class ChatsList extends Component {
         let height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0); 
         let chats=this.props.chats
         let chatsList=this.props.userChatsList
+        let chatsListMode="USER_CHATS_LIST"
         if(this.searchRef.current?.value){
-            if(this.props.searchChatsList.length>0){
-                chatsList=this.props.searchChatsList
-            }else{
-                chatsList="NOT_EXIST"
-            }
-
+            chatsList=this.props.searchChatsList
+            chatsListMode="SEARCH_CHATS_LIST"
         }
-        console.log(this.props.searchChatsList,chatsList);
         return (
             <div className={classes.ChatsList}>
                 <div className={classes.Navigation}>
                     <div className={classes.Burger} onClick={this.showModal}>
                         <img src="/Images/menuBurger.svg"></img>
                     </div>
-                    <div className={classes.Input}><input ref={this.searchRef} onChange={()=>{this.props.test(this.searchRef.current.value)}}></input></div>
+                    <div className={classes.Input}>
+                        <input ref={this.searchRef} placeholder="Поиск чатов" onChange={()=>{this.props.test(this.searchRef.current.value)}}></input>
+                    </div>
                 </div>
                 <div className={classes.ChatsItems} style={{height:height-50}}>
-                    {chatsList!="NOT_EXIST" ? chatsList.sort((key1,key2)=>{
+                    {chatsList.length>0 ? chatsList.sort((key1,key2)=>{
                         let chat1=chats[key1]
                         let chat2=chats[key2]
                         let date1=chat1.lastChangeMessagesDate?chat1.lastChangeMessagesDate:chat1.create
@@ -59,7 +57,6 @@ export class ChatsList extends Component {
                     }).map(chatId=>{
                         let chat=chats[chatId]
                         if(chat=="NOT_EXIST"){
-                            // this.props.history.replace("/chats")    
                             return null
                         }
                         if(chat=="LOADING"){
@@ -87,12 +84,10 @@ export class ChatsList extends Component {
                                     delete={this.props.deleteChat}
                                     lastMessage={lastMessage}
                                     ></ChatItem>
-                    }):<div className={classes.NoSearchChat}>Чатов не найдено</div>}
+                    }):<div className={classes.NoSearchChat}>{chatsListMode=="USER_CHATS_LIST"?"У вас еще нет чатов":"Чатов не найдено"}</div>}
                   
                 </div>
-                {/* <div className={classes.AddWrapper}>
-                    <div onClick={this.showModal} className={classes.Add}></div>
-                </div> */}
+            
                 <Navigation show={this.state.showNavigation} close={this.hideModal}></Navigation>
             </div>
         )

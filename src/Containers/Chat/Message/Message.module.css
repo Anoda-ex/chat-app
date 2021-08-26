@@ -10,8 +10,8 @@
     background-color: white;
 
     border-radius:7px;
-    max-width: 300px;
-    min-width: 150px;
+    max-width: 350px;
+    min-width: 200px;
     width: fit-content;
     -moz-user-select:text; -khtml-user-select: text; user-select: text;
     position: relative;
@@ -24,9 +24,10 @@
     margin-left: auto;
 }
 .Reply{
-    padding-left: 20px;
+    padding-left: 30px;
     margin-bottom: 10px;
     padding-top: 5px;
+    padding-right: 10px;
 }
 .ReplyUser{
     color: rgb(99, 171, 253);
@@ -81,8 +82,16 @@
 }
 @media (max-width: 900px){
     .Message{
-        max-width: 200px;
-        min-width: 100px;
+        max-width: 250px;
+        min-width: 150px;
+
+    }
+
+} 
+@media (max-width: 550px){
+    .Message{
+        max-width: 250px;
+        min-width: 150px;
 
     }
 

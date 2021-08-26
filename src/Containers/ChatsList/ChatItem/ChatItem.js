@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import MessageContent from '../../../Components/MessageContent/MessageContent'
-import { getDate } from '../../../Date'
+import { getDate } from '../../../scripts/Date'
 import classes from "./ChatItem.module.css"
 
 export default (props)=> {

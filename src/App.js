@@ -36,13 +36,17 @@ import {Switch, Route, Redirect} from "react-router-dom"
 import {authRoutes, chatRoutes} from "./routes"
 import Chats from './Components/Chats/Chats'
 import * as actions from "./store/index"
-import { getDate } from './Date'
 export class App extends Component {
     // componentDidMount(){
     //     if()
     //     this.props.subscribeInit()
 
     // }
+    componentDidMount(){
+        window.addEventListener("resize", ()=>{
+            this.forceUpdate()
+        });
+    }
     pushInfo=()=>{
         this.props.database.ref("/test").push({date:Date.now()}).then(response=>{
             // console.log("push info",response);

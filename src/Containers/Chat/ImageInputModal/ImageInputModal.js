@@ -44,7 +44,7 @@ export default class ImageInputModal extends Component {
                         <input className={classes.InputText} type="text" ref={this.inputTextRef} placeholder="Подпись"></input>
                         <div className={classes.InputWrapper}>
                             <input multiple  id="inputFile" type="file" onChange={this.selectFiles} style={{display:"none"}}></input>
-                            <label className={classes.Button} ref={this.inputFileRef} for="inputFile">Выберите файл</label>
+                            <label className={classes.Button} ref={this.inputFileRef} htmlFor="inputFile">Выберите файл</label>
                         </div>
                         <button className={classes.Button} onClick={()=>{this.props.send(false,this.inputTextRef.current.value,this.state.images);this.props.close()}}>Сохранить</button>
                     </div>

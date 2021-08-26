@@ -1,5 +1,4 @@
 .UserSetting{
-    width: 600px;
     margin: 0 auto;
 }
 .TopWrapper{
@@ -8,9 +7,7 @@
     margin: 0 auto;
 }
 .Title{
-    text-align: center;
-    font-size: 28px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 .ImageWrapper{
     width: 150px;
@@ -45,22 +42,17 @@
     
 }
 @media (max-width: 800px){
-    .UserSetting{
-        width: 500px;
-    }
+
 
 } 
-@media (max-width: 650px){
+@media (max-width: 550px){
 
     .NameWrapper{
         margin: 0 auto;
         width: 80%;
         margin-bottom: 20px;
     }
-    .UserSetting{
-        width: 300px;
-        
-    }
+
     .TopWrapper{
         flex-direction: column-reverse;
         align-items: center;
@@ -71,16 +63,7 @@
         margin-bottom: 10px;
     }
     .ImageWrapper{
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 200px;
     }
-} 
-@media (max-width: 450px){
-
-
-    .UserSetting{
-        width: 260px;
-        
-    }
-
 } 

@@ -1,7 +1,8 @@
 import React from 'react'
 import MessageContent from '../../../Components/MessageContent/MessageContent'
 import ImagesBlock from '../../../Components/UI/ImagesBlock/ImagesBlock'
-import { getDateHM } from '../../../Date'
+import { getDateHM } from '../../../scripts/Date'
+import getName from '../../../scripts/getName'
 import classes from "./Message.module.css"
 function Message(props) {
     let style=null
@@ -23,19 +24,20 @@ function Message(props) {
     if(!!props.images && !props.replyMessage && !props.isForward){
         wrapperClasses.push(classes.MessageWithImages)
     }
-    let userName = props?.user?.public?.name?props.user.public.name:props.message.user
+    // let userName = getName(props.users,props.message.user)
     let userForwardName = ""
-    if(props.forwardUser){
-        userForwardName=props.forwardUser?.public?.name ? props.forwardUser.public.name:props.message.body.user
-    }
+    // if(props.forwardUser){
+    //     userForwardName=getName(props.users,props.message.body.user)
+    // }
+    
     return (
         
         <div className={classes.MessageWrapper} onMouseDown={props.toggleSelectMessageHandler} onMouseUp={props.toggleSelectMessageHandler} onDoubleClick={props.onDoubleClick}>
             <div className={wrapperClasses.join(" ")} >
-                {props.message.isForward&&<div className={classes.ForwardMessage}>Переслано от {userForwardName}</div>}
-                {!props.author&&!props.message.isForward&&<div className={classes.AuthorName}>{userName}</div>}
+                {props.message.isForward&&<div className={classes.ForwardMessage}>Переслано от {getName(props.users,props.message.body.user)}</div>}
+                {!props.author&&!props.message.isForward&&<div className={classes.AuthorName}>{getName(props.users,props.message.user)}</div>}
                 {props.replyMessage&&<div className={classes.Reply}>
-                    <div className={classes.ReplyUser}>{props.replyMessage.user}</div>  
+                    <div className={classes.ReplyUser}>{getName(props.users,props.replyMessage.user)}</div>  
                     <MessageContent message={props.replyMessage}></MessageContent>
                 </div>}
 

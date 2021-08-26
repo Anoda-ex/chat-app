@@ -8,7 +8,6 @@ export const createChat=(name,description,image)=>{
         //добавить к чатам
         let UID = state().auth.UID
 
-        // console.log(name,description);
         firebase.database().ref("/chats").push(
             {
                
@@ -67,10 +66,13 @@ export const deleteMessage=(chatId,messageId)=>{
 //подписка на получение иформации о своем аккаунте, вызывается при первом рендере листа чатов
 export const subscribeInit=()=>{
     return (dispatch,state)=>{
-        console.log("subscribeInit");
         let UID = state().auth.UID
 
         //подписка на получение информации о чатаъ пользователя
+        dispatch({
+            type:types.ADD_FIREBASE_USER_LISTENER,
+            ref:"users/"+UID+"/private/chats/"
+        })
         firebase.database().ref("users/"+UID+"/private/chats/").on("value",(userChatSnapshot)=>{
             //обработка полученного списка чатов
             dispatch(handleChats("init",userChatSnapshot.val()))
@@ -78,6 +80,10 @@ export const subscribeInit=()=>{
             
         })
         //получение информации о пользователе, имя аватарка
+        dispatch({
+            type:types.ADD_FIREBASE_USER_LISTENER,
+            ref:"users/"+UID
+        })
         firebase.database().ref("users/"+UID).on("value",(userDataSnapshot)=>{
             dispatch({
                 type:types.SET_USER_INFO,
@@ -103,6 +109,10 @@ export const getChat=(chatId,entryId=false)=>{
             chatId:chatId
         })
         // получить информацию о чате(кроме сообщений)
+        dispatch({
+            type:types.ADD_FIREBASE_USER_LISTENER,
+            ref:"chats/"+chatId+"/chatData"
+        })
         firebase.database().ref("chats/"+chatId+"/chatData").on("value",chatDataSnapshot=>{
             const chatData = chatDataSnapshot.val()
             //если чата не существует то удалить чат со списка чатов пользователя
@@ -137,12 +147,20 @@ export const getChat=(chatId,entryId=false)=>{
 
         })
         //получить все сообщения чата сортированные по дате и подписаться на добавление новых сообщений
+        dispatch({
+            type:types.ADD_FIREBASE_USER_LISTENER,
+            ref:"chats/"+chatId+"/messagesData/messages"
+        })
         firebase.database().ref("chats/"+chatId+"/messagesData/messages").orderByChild("date").on("child_added",chatMessageDataSnapshot=>{
             //id сообщения
             let messageId=chatMessageDataSnapshot.val().message
             //id реплая на сообщение(в таблице чаты)
             let replyChatMessageId=chatMessageDataSnapshot.val().replyChatMessageId
             //получение самого сообщения 
+            dispatch({
+                type:types.ADD_FIREBASE_USER_LISTENER,
+                ref:"/messages/"+messageId
+            })
             firebase.database().ref("/messages/"+messageId).on("value",messageDataSnapshot=>{
                 const messageData=messageDataSnapshot.val()
                 //если сообщение есть то трансформировать его(записать туда id сообщения id сообщения реплая)
@@ -168,6 +186,10 @@ export const getChat=(chatId,entryId=false)=>{
                     })
                     //получить информацию о отправителе сообщения
                     if(!state()?.chats?.users[messageData.user]){
+                            dispatch({
+                                type:types.ADD_FIREBASE_USER_LISTENER,
+                                ref:"users/"+messageData.user+"/public"
+                            })
                             firebase.database().ref("users/"+messageData.user+"/public").on("value",(userDataSnapshot)=>{
                                 dispatch({
                                     type:types.SET_USER_INFO,
@@ -197,22 +219,28 @@ export const getChat=(chatId,entryId=false)=>{
 // получение чатов со списка, переданного в функцию, имеет 2 режима 
 export const handleChats=(type,chats)=>{
     return (dispatch,state)=>{
-        console.log("handleChats", type,chats);
         
         //режим инициализации, срабатывает при обновления чатов пользователя
-        if(type=="init" && chats){
-            let userChatsList=[]
-            Object.keys(chats).forEach(entryId=>{
-                let chatId=chats[entryId].chat
-                //подписка на чат
-                dispatch(getChat(chatId,entryId))
-                
-                userChatsList.push(chats[entryId].chat)                
-            })
-            dispatch({
-                type:types.SET_USER_CHATS_LIST,
-                chatsList:userChatsList
-            })
+        if(type=="init"){
+            if(chats){
+                let userChatsList=[]
+                Object.keys(chats).forEach(entryId=>{
+                    let chatId=chats[entryId].chat
+                    //подписка на чат
+                    dispatch(getChat(chatId,entryId))
+                    
+                    userChatsList.push(chats[entryId].chat)                
+                })
+                dispatch({
+                    type:types.SET_USER_CHATS_LIST,
+                    chatsList:userChatsList
+                })
+            }else{
+                dispatch({
+                    type:types.SET_USER_CHATS_LIST,
+                    chatsList:[]
+                })
+            }
         }
         //режим поиска, срабатывает для обработки поискового запроса на чаты
         if(type=="search"){
@@ -244,12 +272,15 @@ export const handleChats=(type,chats)=>{
 
 export const sendMessage=(chatId,message,images,replyMessage)=>{
     return (dispatch,state)=>{
-        console.log("img",images);
         let UID = state().auth.UID
         let date=firebase.database.ServerValue.TIMESTAMP
+        let text=message.trim()
+        if(text.length<1 && images.length<1){
+            return 
+        }
         firebase.database().ref("messages/").push({
             user:UID,
-            text:message,
+            text:text,
             images:images,
             date:date,
         }).then(response=>{
@@ -283,7 +314,6 @@ export const forwardMessage=(chatId,message)=>{
                 ...message
             }
         }
-        console.log("AAA",newBody);
         firebase.database().ref("messages/").push({
             user:UID,
             body:newBody,
@@ -291,7 +321,6 @@ export const forwardMessage=(chatId,message)=>{
             date:date
         }).then(response=>{
 
-            // console.log(response.path.pieces_[1]);
             firebase.database().ref("chats/"+chatId+"/messagesData/messages/").push({
                 message:response.path.pieces_[1],
             }).then(()=>{
@@ -316,12 +345,26 @@ export const deleteChat=(chatId)=>{
 export const test=(search)=>{
     return (dispatch,state)=>{
         firebase.database().ref("chats/").orderByChild('searchName').startAt(search).endAt(search+"\uf8ff").once("value",snaphot=>{
-            console.log(snaphot.val());
             // dispatch({
             //     type: types.SET_CHATS_LIST,
             //     chatsList:Object.keys(snaphot.val())
             // })
             dispatch(handleChats("search",snaphot.val()))
+        })
+    }
+}
+
+export const chatExit=(chatId)=>{
+    return(dispatch,state)=>{
+        let UID=state().auth.UID
+        firebase.database().ref("users/"+UID+"/private/chats").orderByChild("chat").startAt(chatId).endAt(chatId+"\uf8ff").once("value",chatExitSnapshot=>{
+            let entryId=Object.keys(chatExitSnapshot.val())[0]
+            firebase.database().ref("users/"+UID+"/private/chats/"+entryId).remove()
+            firebase.database().ref("chats/"+chatId+"/chatData/members/").orderByValue().startAt(UID).endAt(UID+"\uf8ff").once("value",chatMemberSnaphot=>{
+                let entryMemberId=Object.keys(chatMemberSnaphot.val())[0]
+                firebase.database().ref("chats/"+chatId+"/chatData/members/").remove(entryMemberId)
+            })
+            
         })
     }
 }

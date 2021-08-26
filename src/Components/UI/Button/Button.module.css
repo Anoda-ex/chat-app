@@ -10,7 +10,8 @@
     justify-content: center;
     font-weight: 400;
     color: black;
-    
+    padding: 0
+    5px;
 }
 .Button:hover{
     cursor: pointer;

@@ -34,15 +34,15 @@ export default class CreateChat extends Component {
         return (
             <Modal show={this.props.show} close={this.props.hideModal}>
                 <div className={classes.AddChat}>
-                    <h1 className={classes.Title}>Создать чат</h1>
+                    <h2 className={classes.Title}>Создать чат</h2>
                     <div className={classes.Wrapper}>
-                        <p className={classes.InputName}>Введите имя чата</p>
+                        <h3 className={classes.InputName}>Введите имя чата</h3>
                         <input  ref={this.nameRef} className={classes.Input}></input>
 
                     </div>
                     <div className={classes.Wrapper}>
                         <div className={classes.descImageWrapper}>
-                            <p className={classes.InputName}>Введите описание чата</p>
+                            <h3 className={classes.InputDesc}>Введите описание чата</h3>
                             <div className={classes.ImageWrapper} onClick={()=>{this.setState({showImageInputModal:true})}}>
                                 <img className={classes.Image} onClick={()=>{this.imageInputRef.current.click()}} 
                                     src={this.state.image?

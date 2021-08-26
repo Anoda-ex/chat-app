@@ -38,7 +38,7 @@ export class UserSetting extends Component {
                     <div className={classes.UserSetting}>
 
                    
-                        <div className={classes.Title}>Настройки аккаунта</div>
+                        <h2 className={classes.Title}>Настройки аккаунта</h2>
                         <div className={classes.TopWrapper}>
                             
                             <div className={classes.ImageWrapper} onClick={()=>{this.imageInputRef.current.click()}}>
@@ -47,14 +47,14 @@ export class UserSetting extends Component {
                                 <img  src={this.state.imagesModal?this.state.imagesModal:"/Images/noPhoto.jpg"}></img>
                             </div>
                             <div className={classes.NameWrapper}>
-                                <div className={classes.NameTitle}>Имя пользователя</div>
+                                <h3 className={classes.NameTitle}>Имя пользователя</h3>
                                 <input ref={this.NameInputRef} className={classes.NameInput}></input>
                                 {/* <div className={classes.IdWrapper}>
                                     {this.props.UID}
                                 </div> */}
                             </div>
                         </div>
-                        <Button className={classes.SaveButton} onClick={()=>{this.props.save("images",this.NameInputRef.current.value)}}>Сохранить изминения</Button>
+                        <Button className={classes.SaveButton} onClick={()=>{this.props.save("images",this.NameInputRef.current.value);this.props.hideModal()}}>Сохранить изминения</Button>
                     </div>
                 </Modal>
 

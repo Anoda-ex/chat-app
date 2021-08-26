@@ -78,5 +78,9 @@ export const userExit=()=>{
         dispatch({
             type:types.CLEAN_CHATS_DATA
         })
+        state().auth.userListeners.forEach(path => {
+            firebase.database().ref(path).off()
+        });
     }
 }
+
