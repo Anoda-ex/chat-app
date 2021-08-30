@@ -1,7 +1,7 @@
 import * as actions from "../actionsConsts"
 const initState={
-    UID:"isnP8gd3YmM0eQiRM0hIHr2hBhy1",
-    // UID:false,
+    // UID:"isnP8gd3YmM0eQiRM0hIHr2hBhy1",
+    UID:"INIT",
     isAuth:true,
     loading:false,
     error:null,

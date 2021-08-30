@@ -60,6 +60,21 @@ export const auth =(email,password,isLogin)=>{
         }
     }
 } 
+export const initUserSignin=(user)=>{
+    return (dispatch)=>{
+        if(user){
+            dispatch({
+                type:types.AUTH_SUCCESS,
+                UID:user.uid
+            })
+        }else{
+            dispatch({
+                type:types.AUTH_SUCCESS,
+                UID:null
+            })
+        }
+    }   
+}
 export const changeUserSetting=(images=null,name=null)=>{
     return (dispatch,state)=>{
         if(images){
@@ -72,6 +87,7 @@ export const changeUserSetting=(images=null,name=null)=>{
 }
 export const userExit=()=>{
     return(dispatch,state)=>{
+        firebase.auth().signOut()
         dispatch({
             type:types.AUTH_EXIT
         })

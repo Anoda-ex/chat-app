@@ -17,7 +17,14 @@ firebase.initializeApp({
     appId: "1:802123311223:web:13cd6546011edba6f9fe72"
   }
 );
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+// firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+// console.log(firebase.auth().currentUser);
+// firebase.auth().User
+
+
+
+
+
 
 
 const rootReducer = combineReducers({
