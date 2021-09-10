@@ -3,9 +3,6 @@ import Background from '../Background/Background'
 import classes from "./Modal.module.css"
 export default (props)=> {
         let style={}
-        // if(!props.show){
-            // return null
-        // }
         if(props.noPadding){
             style.padding=0
             
@@ -20,7 +17,7 @@ export default (props)=> {
             <React.Fragment>
                 {props.show&&<Background close={props.close} level={props.level}></Background>}
                 <div className={classList.join(" ")} style={style}>
-                    {props.children}
+                    {props.show&&props.children}
                 </div>
             </React.Fragment>
         )

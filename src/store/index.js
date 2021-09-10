@@ -1,2 +1,2 @@
-export * from "./chatsActions"
+export * from "./chats/actions"
 export * from "./auth/actions"

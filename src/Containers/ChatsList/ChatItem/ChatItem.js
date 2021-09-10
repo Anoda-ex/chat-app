@@ -9,7 +9,7 @@ export default (props)=> {
     return (
         <NavLink to={"/chats/"+props.id} className={classes.Link} activeClassName={classes.active}>
             <div className={classes.ChatItem} >
-                <div className={classes.Avatar} onClick={()=>{props.delete(props.id)}}>
+                <div className={classes.Avatar}>
                     <img className={classes.Avatar} src={props.avatar?props.avatar:"/Images/noPhoto.jpg"}></img>
                 </div>
                 <div className={classes.Wrapper}>

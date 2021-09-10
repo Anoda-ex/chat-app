@@ -1,6 +1,5 @@
-import { logDOM } from "@testing-library/react"
 import firebase from "firebase"
-import * as types from "./actionsConsts"
+import * as types from "../actionsConsts"
 
 
 export const createChat=(name,description,image)=>{
@@ -331,24 +330,28 @@ export const forwardMessage=(chatId,message)=>{
 }
 
 
-
+let checkAdmin=(chatId,state)=>{
+    console.log(state.chats.chats[chatId].creator==state.auth.UID);
+    if(state.chats.chats[chatId].creator==state.auth.UID){
+        return true
+    }
+    return false
+}
 
 //удалить чат с базы, подписки на чат удалятся сами через метод getChat()
 export const deleteChat=(chatId)=>{
     return (dispatch,state)=>{
         let UID = state().auth.UID
+        if(checkAdmin(chatId,state())){
+            firebase.database().ref("chats/"+chatId).remove()
 
-        firebase.database().ref("chats/"+chatId).remove()
+        }
     }
 }
 //поиск чатов
-export const test=(search)=>{
+export const search=(searchParam)=>{
     return (dispatch,state)=>{
-        firebase.database().ref("chats/").orderByChild('searchName').startAt(search).endAt(search+"\uf8ff").once("value",snaphot=>{
-            // dispatch({
-            //     type: types.SET_CHATS_LIST,
-            //     chatsList:Object.keys(snaphot.val())
-            // })
+        firebase.database().ref("chats/").orderByChild('searchName').startAt(searchParam).endAt(searchParam+"\uf8ff").once("value",snaphot=>{
             dispatch(handleChats("search",snaphot.val()))
         })
     }
@@ -359,12 +362,29 @@ export const chatExit=(chatId)=>{
         let UID=state().auth.UID
         firebase.database().ref("users/"+UID+"/private/chats").orderByChild("chat").startAt(chatId).endAt(chatId+"\uf8ff").once("value",chatExitSnapshot=>{
             let entryId=Object.keys(chatExitSnapshot.val())[0]
+            console.log("ts",entryId);
             firebase.database().ref("users/"+UID+"/private/chats/"+entryId).remove()
             firebase.database().ref("chats/"+chatId+"/chatData/members/").orderByValue().startAt(UID).endAt(UID+"\uf8ff").once("value",chatMemberSnaphot=>{
                 let entryMemberId=Object.keys(chatMemberSnaphot.val())[0]
-                firebase.database().ref("chats/"+chatId+"/chatData/members/").remove(entryMemberId)
+                firebase.database().ref("chats/"+chatId+"/chatData/members/"+entryMemberId).remove()
             })
-            
         })
     }
+}
+export const changeChatInfo=(chatId,name,description,image)=>{
+    return (dispatch,state)=>{
+        if(checkAdmin(chatId,state())){
+
+            if(name){
+                firebase.database().ref("/chats/"+chatId+"/chatData/name").set(name)
+            }
+            if(description){
+                firebase.database().ref("/chats/"+chatId+"/chatData/description").set(description)
+            }
+            if(image){
+                firebase.database().ref("/chats/"+chatId+"/chatData/images").set({image:image})
+            }
+        }
+    }
+    
 }

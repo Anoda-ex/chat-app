@@ -14,12 +14,8 @@ class Auth extends Component {
   auth=()=>{
       this.props.auth(this.emailRef.current.value,this.passwordRef.current.value,this.state.isLogin)
   }
-  // componentDidUpdate=()=>{
-  //   console.log(" COMPONENT MOUNT");
-  // }
+
   componentWillUnmount=()=>{
-    // console.log("AUTH UNMOUNT");
-    // this.props.subscribeInit()
     this.props.history.push("/chats")
   }
   render() {
@@ -49,7 +45,6 @@ const mapDispatchToProps = (dispatch)=>{
       
     }
 }
-
 
 
 export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Auth))

@@ -1,22 +1,6 @@
 import * as types from "../actionsConsts"
 import firebase from "firebase"
 
-
-
-// export const subscribeToChat=(dispatch,chatId)=>{
-//     firebase.database().ref("chats/"+chatId).on("value",dataSnapshot=>{
-//         const data=dataSnapshot.val()
-//         dispatch({
-//             type:types.ADD_CHAT,
-//             chat:data
-//         })
-//     })
-// }
-
-
-
-
-
 export const auth =(email,password,isLogin)=>{
     return (dispatch)=>{
         dispatch({

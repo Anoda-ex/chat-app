@@ -16,6 +16,7 @@ class Chat extends Component {
         showImageModal:false,
         imageModalInitImage:null,
         replyMessage:null,
+        showChatMenu:false
     }
 
     componentDidUpdate(prevProps,state){
@@ -219,9 +220,6 @@ class Chat extends Component {
                             onDoubleClick={()=>{this.setState({replyMessage:message})}}
                             users={this.props.users}
                             replyMessage={this.getMessageFromChatEntry(message.replyChatMessageId)}
-                            // user={this.props.users[message.user]}
-                            // replyMessageUser={this.getMessa}
-                            // forwardUser={message.isForward && this.props.users[message.body.user]}
                             >
                         </Message>
                     })}
@@ -258,14 +256,20 @@ class Chat extends Component {
                 }
 
                 
-                {this.state.showChatMenu&&<ChatMenu 
+                <ChatMenu 
                     close={()=>{this.setState({showChatMenu:false})}} 
                     chatExit={()=>{this.props.chatExit(this.props.match.params.id);
                                    this.props.history.push("/chats") }}
                     isAdmin={this.props.UID==chat.creator}
                     deleteChat={()=>{this.props.deleteChat(this.props.match.params.id)}}
+                    chatName={chat.name}
+                    chatDescription={chat.description}
+                    chatImage={chat.images?chat.images[Object.keys(chat.images)[0]]:null}
+                    show={this.state.showChatMenu}
+                    changeChatInfo={this.props.changeChatInfo}
+                    chatId={this.props.match.params.id}
                     >
-                </ChatMenu>}
+                </ChatMenu>
                 
                 {this.state.forwardMessages&&<ListModal startForward={this.forwardMessages} close={()=>{this.setState({forwardMessages:false})}}>
 
@@ -299,7 +303,8 @@ const mapDispatchToProps = dispatch=>{
         getChat:(chatId)=>dispatch(actions.getChat(chatId)),
         enterToChat:(chatId)=>dispatch(actions.enterToChat(chatId)),
         chatExit:(chatId)=>dispatch(actions.chatExit(chatId)),
-        deleteChat:(chatId)=>dispatch(actions.deleteChat(chatId))
+        deleteChat:(chatId)=>dispatch(actions.deleteChat(chatId)),
+        changeChatInfo:(chatId,name,description,image)=>dispatch(actions.changeChatInfo(chatId,name,description,image))
     }
 }
 

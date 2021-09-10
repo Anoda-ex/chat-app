@@ -62,7 +62,6 @@ export default class ImagesBlock extends React.Component {
             <div className={classes.ImagesWrapper}>
                         {this.props.images.map((image,num)=>{
                             if(num<=10){
-
                                 return <div key={num}  style={{
                                     width:this.getImageWidth(this.props.images.length,num)+"%",
                                     height:this.getImageHeight(this.props.images.length,num)+"%",
@@ -71,7 +70,6 @@ export default class ImagesBlock extends React.Component {
                                 </div>
                             }
                         })}
-
                         {this.state.focusImage>-1 && <React.Fragment>
                             <img className={classes.FocusImage} src={this.props.images[this.state.focusImage]} onClick={()=>{this.setState({focusImage:-1})}} onWheel={this.changeFocusImage}></img>
                             <Background close={()=>{this.setState({focusImage:-1})}}></Background>   

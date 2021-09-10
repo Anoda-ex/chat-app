@@ -17,3 +17,6 @@
     cursor: pointer;
     background-color: rgb(110, 209, 255);
 }
+.Centr{
+    margin: 0 auto;
+}

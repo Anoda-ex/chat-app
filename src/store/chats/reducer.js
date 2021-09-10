@@ -1,4 +1,4 @@
-import * as types from "./actionsConsts"
+import * as types from "../actionsConsts"
 const initState={
    chats:{},
    messages:{},

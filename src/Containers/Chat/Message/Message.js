@@ -24,12 +24,7 @@ function Message(props) {
     if(!!props.images && !props.replyMessage && !props.isForward){
         wrapperClasses.push(classes.MessageWithImages)
     }
-    // let userName = getName(props.users,props.message.user)
     let userForwardName = ""
-    // if(props.forwardUser){
-    //     userForwardName=getName(props.users,props.message.body.user)
-    // }
-    
     return (
         
         <div className={classes.MessageWrapper} onMouseDown={props.toggleSelectMessageHandler} onMouseUp={props.toggleSelectMessageHandler} onDoubleClick={props.onDoubleClick}>
@@ -40,9 +35,7 @@ function Message(props) {
                     <div className={classes.ReplyUser}>{getName(props.users,props.replyMessage.user)}</div>  
                     <MessageContent message={props.replyMessage}></MessageContent>
                 </div>}
-
                 {messageData.images&&<ImagesBlock images={messageData.images}></ImagesBlock>}
-                
                 {messageData.text&&<p  className={classes.MessageText}>{messageData.text}</p>}
                 {props.select&&<div className={classes.Select}></div>}
                 <div className={classes.Date}>{getDateHM(props.message.date)}</div>

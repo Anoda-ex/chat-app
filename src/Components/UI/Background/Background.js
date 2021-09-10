@@ -5,8 +5,6 @@ export default function Background(props) {
     let level=props.level?props.level:1
     style.zIndex=level*100
     return (
-        <div className={classes.Background} onClick={props.close} style={style}>
-            
-        </div>
+        <div className={classes.Background} onClick={props.close} style={style}></div>
     )
 }

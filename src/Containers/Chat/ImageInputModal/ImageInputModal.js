@@ -37,9 +37,7 @@ export default class ImageInputModal extends Component {
                 <div className={classes.Component}>
                     {this.state.images.length>0?
                     <div className={classes.Images}><ImagesBlock images={this.state.images}></ImagesBlock></div>
-                    :<div className={classes.TitleNoImages}>Нет фотографий, выберите их</div>}
-
-                    
+                    :<div className={classes.TitleNoImages}>Нет фотографий, выберите их</div>} 
                     <div className={classes.ControlButtons}>
                         <input className={classes.InputText} type="text" ref={this.inputTextRef} placeholder="Подпись"></input>
                         <div className={classes.InputWrapper}>

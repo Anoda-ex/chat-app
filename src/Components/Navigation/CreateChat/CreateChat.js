@@ -5,8 +5,7 @@ import Button from "../../UI/Button/Button"
 export default class CreateChat extends Component {
     state={
         showImageInputModal:false,
-        image:false,
-       
+        image:false,       
     }
     nameRef=createRef()
     descRef=createRef()
@@ -24,7 +23,6 @@ export default class CreateChat extends Component {
                 reader.onloadend = (image)=> {
                     if(image.target.result.match(image)){
                         this.setState({image:image.target.result})
-
                     }
                 }
                 reader.readAsDataURL(file)
@@ -38,7 +36,6 @@ export default class CreateChat extends Component {
                     <div className={classes.Wrapper}>
                         <h3 className={classes.InputName}>Введите имя чата</h3>
                         <input  ref={this.nameRef} className={classes.Input}></input>
-
                     </div>
                     <div className={classes.Wrapper}>
                         <div className={classes.descImageWrapper}>

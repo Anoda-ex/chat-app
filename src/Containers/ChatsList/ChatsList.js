@@ -44,7 +44,7 @@ export class ChatsList extends Component {
                         <img src="/Images/menuBurger.svg"></img>
                     </div>
                     <div className={classes.Input}>
-                        <input ref={this.searchRef} placeholder="Поиск чатов" onChange={()=>{this.props.test(this.searchRef.current.value)}}></input>
+                        <input ref={this.searchRef} placeholder="Поиск чатов" onChange={()=>{this.props.search(this.searchRef.current.value)}}></input>
                     </div>
                 </div>
                 <div className={classes.ChatsItems} style={{height:height-50}}>
@@ -81,7 +81,6 @@ export class ChatsList extends Component {
                                     name={chat.name} 
                                     avatar={chat.images&&chat.images[Object.keys(chat.images)[Object.keys(chat.images).length-1]]}
                                     chatCreateDate={chat.create}
-                                    delete={this.props.deleteChat}
                                     lastMessage={lastMessage}
                                     ></ChatItem>
                     }):<div className={classes.NoSearchChat}>{chatsListMode=="USER_CHATS_LIST"?"У вас еще нет чатов":"Чатов не найдено"}</div>}
@@ -101,18 +100,16 @@ const mapStateToProps = (state) => {
         searchChatsList:state.chats.searchChatsList,
         UID:state.auth.UID,
         users:state.chats.users
-        // isUserLoad:state.chats.users[state.auth.UID]
 
     }
 }
 
 const mapDispatchToProps = dispatch=>{
     return{
-        // createChat:(name,description,image)=>dispatch(actions.createChat(name,description,image)),
         enterToChat:(chatId)=>dispatch(actions.enterToChat(chatId)),
         subscribeInit:()=>dispatch(actions.subscribeInit()),
         deleteChat:(chatId)=>dispatch(actions.deleteChat(chatId)),
-        test:(search)=>dispatch(actions.test(search))
+        search:(search)=>dispatch(actions.search(search))
     }
 }
 

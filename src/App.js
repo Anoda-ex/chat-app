@@ -9,7 +9,6 @@ import Chats from './Components/Chats/Chats'
 import * as actions from "./store/index"
 import firebase from "firebase"
 export class App extends Component {
-
     componentDidMount(){
         window.addEventListener("resize", ()=>{
             this.forceUpdate()
@@ -25,12 +24,10 @@ export class App extends Component {
     }
     pushInfo=()=>{
         this.props.database.ref("/test").push({date:Date.now()}).then(response=>{
-            // console.log("push info",response);
         })
     }
     getInfo=()=>{
         this.props.database.ref("/test").on("value",dataSnapshot=>{
-            // console.log("get info",dataSnapshot.val());
         })
     }
  
@@ -40,7 +37,6 @@ export class App extends Component {
 
     render() {
     let height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);;   
-       
         if(this.props.UID=="INIT"){
             return<div className={classes.Loading}>Загрузка...</div>
         }else{

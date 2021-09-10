@@ -7,9 +7,6 @@ class ListModal extends Component {
         let chats=this.props.chats
         return (
             <Modal close={this.props.close} show={true}>
-                {/* <div className={classes.}>
-                    
-                </div> */}
                 <div className={classes.wrapper}>
 
                     {Object.keys(chats).map(chatId=>{
@@ -29,8 +26,5 @@ const mapStateToProps = (state) => {
         chats: state.chats.chats
     }    
 }
-
-
-
 
 export default connect(mapStateToProps)(ListModal)

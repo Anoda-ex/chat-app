@@ -7,7 +7,7 @@ import thunk from "redux-thunk"
 import {BrowserRouter} from "react-router-dom"
 import {Provider} from "react-redux"
 import authReducer from "./store/auth/reducer"
-import chatsReducer from "./store/chatsReducer"
+import chatsReducer from "./store/chats/reducer"
 firebase.initializeApp({
     apiKey: "AIzaSyC2Gf1VqDDnCCth5xGCVbLL6coHBWJoq6Y",
     authDomain: "chat-cc558.firebaseapp.com",
@@ -17,15 +17,6 @@ firebase.initializeApp({
     appId: "1:802123311223:web:13cd6546011edba6f9fe72"
   }
 );
-// firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-// console.log(firebase.auth().currentUser);
-// firebase.auth().User
-
-
-
-
-
-
 
 const rootReducer = combineReducers({
     auth:authReducer,
@@ -43,4 +34,3 @@ ReactDOM.render(
    
     document.getElementById('root')
 );
-
